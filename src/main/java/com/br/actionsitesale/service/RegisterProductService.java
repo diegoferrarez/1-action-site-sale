@@ -5,11 +5,14 @@ import com.br.actionsitesale.controller.dto.ProductResponse;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RegisterProductService {
 
    ProductResponse createProduct(ProductRequest request);
-   ProductResponse changeProduct(String id, ProductRequest request);
+   ResponseEntity<Optional<ProductRequest>> changeProduct(String id, ProductRequest request);
    List<ProductResponse> findAll();
+   Optional<ProductResponse> findById(String id);
+   String delete(String id);
 
 }

@@ -20,8 +20,8 @@ public class SwaggerConfig {
 
     private static final String SWAGGER_API_VERSION = "1.0.0";
     private static final String LICENSE_TEXT = "MIT";
-    private static final String title = "br.com.bancoKol";
-    private static final String description = "Serviços do banco Kol.";
+    private static final String title = "action-site-sale";
+    private static final String description = "Serviços de ações do site";
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()

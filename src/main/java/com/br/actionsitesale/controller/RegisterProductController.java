@@ -12,9 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -32,6 +34,13 @@ public class RegisterProductController {
         return registerProductService.findAll();
     }
 
+    @ApiOperation(value = "Busca um produto por id")
+    @GetMapping("/findby/id/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public Optional<ProductResponse> getById(@PathVariable String id){
+        return registerProductService.findById(id);
+    }
+
     @ApiOperation(value="Registra os produtos para venda")
     @PostMapping("/insert")
     @ResponseStatus(HttpStatus.CREATED)
@@ -40,9 +49,16 @@ public class RegisterProductController {
     }
 
     @ApiOperation(value = "Altera informação de um produto")
-    @PutMapping("/update-products/{id}")
+    @PutMapping("/update-market/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ProductResponse update(@PathVariable String id, @RequestBody ProductRequest request){
+    public ResponseEntity<Optional<ProductRequest>> update(@PathVariable String id, @RequestBody ProductRequest request){
         return registerProductService.changeProduct(id, request);
+    }
+
+    @ApiOperation(value="Deletar um determinado produto")
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public String deleteAccount(@PathVariable final String id){
+        return registerProductService.delete(id);
     }
 }

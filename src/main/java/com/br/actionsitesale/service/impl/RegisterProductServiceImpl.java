@@ -9,11 +9,14 @@ import com.br.actionsitesale.service.mapper.RegisterProductMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -32,33 +35,41 @@ public class RegisterProductServiceImpl implements RegisterProductService {
     }
 
     @Override
-    public ProductResponse changeProduct(String id, ProductRequest dto) {
-//        ModelMapper modelMapper = new ModelMapper();
-//        var alteredProduct = this.repository.findById(id);
-//
-//        return repository.findById(id).map(prdt -> {
-//            Product product = savedProduct(dto);
-//            product.setId(id);
-//            repository.save(product);
-//            return modelMapper.map(product, ProductResponse.class);
-//        });
-
-        return null;
-//
-//        return repository.findById(id).map(c -> {
-//            Clients clients = loadCadastro(dto);
-//            clients.setId(id);
-//            clients.setStatusAccount(c.getStatusAccount());
-//            repository.save(clients).subscribe();
-//            return modelMapper.map(clients, ClientsResponse.class);
-//        });
+    @Transactional
+    public ResponseEntity<Optional<ProductRequest>> changeProduct(String id, ProductRequest dto) {
+        Optional<Product> product = repository.findById(id);
+        if (product.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        product.ifPresent(s -> {
+            s.setIdInternal(dto.getIdInternal());
+            s.setNameProduct(dto.getNameProduct());
+            s.setValueProduct(dto.getValueProduct());
+            s.setSizeProduct(dto.getSizeProduct());
+            repository.save(s);
+        });
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
+    @Transactional
     public List<ProductResponse> findAll() {
         ModelMapper modelMapper = new ModelMapper();
         List<Product> products = repository.findAll();
         return Arrays.asList(modelMapper.map(products, ProductResponse[].class));
+    }
+
+    @Override
+    @Transactional
+    public Optional<ProductResponse> findById(String id){
+        return repository.findById(id).map(ProductResponse::converter);
+    }
+
+    @Override
+    @Transactional
+    public String delete(final String id){
+        repository.deleteById(id);
+        return "successfully deleted";
     }
 
     private Product savedProduct (ProductRequest p){
