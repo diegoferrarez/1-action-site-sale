@@ -3,7 +3,10 @@ package com.br.actionsitesale.controller;
 import com.br.actionsitesale.controller.dto.ProductRequest;
 import com.br.actionsitesale.controller.dto.ProductResponse;
 import com.br.actionsitesale.model.Product;
+import com.br.actionsitesale.model.Users;
+import com.br.actionsitesale.model.enums.StatusLogin;
 import com.br.actionsitesale.service.RegisterProductService;
+import com.br.actionsitesale.utils.UserConstants;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.Response;
@@ -44,8 +47,10 @@ public class RegisterProductController {
     @ApiOperation(value="Registra os produtos para venda")
     @PostMapping("/insert")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductResponse create(@RequestBody ProductRequest request){
-        return registerProductService.createProduct(request);
+    public ProductResponse create(@RequestHeader(name = UserConstants.USER_SIGN_HEADER)String userLogin,
+                                  @RequestHeader(name = UserConstants.USER_PASS_HEADER)String password,
+                                  @RequestBody ProductRequest request){
+        return registerProductService.createProduct(userLogin, password, request);
     }
 
     @ApiOperation(value = "Altera informação de um produto")

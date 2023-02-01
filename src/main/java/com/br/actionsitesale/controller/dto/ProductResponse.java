@@ -33,9 +33,7 @@ public class ProductResponse {
                 .valueProduct(c.getValueProduct())
                 .sizeProduct(c.getSizeProduct())
                 .user(UserAuth.builder()
-                        .login(c.getUser().getLogin())
                         .numberCorp(c.getUser().getNumberCorp())
-                        .statusCorp(c.getUser().getStatusCorp())
                         .build())
                 .build();
     }

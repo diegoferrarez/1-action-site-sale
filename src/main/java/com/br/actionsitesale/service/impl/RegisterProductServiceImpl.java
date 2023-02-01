@@ -5,6 +5,7 @@ import com.br.actionsitesale.controller.dto.ProductResponse;
 import com.br.actionsitesale.model.Product;
 import com.br.actionsitesale.repository.ProductStoreRepository;
 import com.br.actionsitesale.service.RegisterProductService;
+import com.br.actionsitesale.service.feign.api.UserApi;
 import com.br.actionsitesale.service.mapper.RegisterProductMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -24,12 +25,15 @@ import java.util.Optional;
 public class RegisterProductServiceImpl implements RegisterProductService {
 
     private final RegisterProductMapper mapper;
+//    private final UserApi userApi;
     @Autowired
     private ProductStoreRepository repository;
 
     @Override
     @Transactional
-    public ProductResponse createProduct(ProductRequest dto) {
+    public ProductResponse createProduct(String userLogin, String password, ProductRequest dto) {
+
+//        ProductResponse productResponse = userApi
         var registerProduct = this.repository.save(savedProduct(dto));
         return this.mapper.toResponse(registerProduct);
     }

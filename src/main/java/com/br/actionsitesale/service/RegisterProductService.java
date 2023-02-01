@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface RegisterProductService {
 
-   ProductResponse createProduct(ProductRequest request);
+   ProductResponse createProduct(String userLogin, String password, ProductRequest request);
    ResponseEntity<Optional<ProductRequest>> changeProduct(String id, ProductRequest request);
    List<ProductResponse> findAll();
    Optional<ProductResponse> findById(String id);

@@ -7,6 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @Slf4j
 @SpringBootApplication
+@EnableFeignClients
 public class ActionSiteSaleApplication {
 
 	public static void main(String[] args) {
