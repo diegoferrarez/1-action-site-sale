@@ -10,13 +10,13 @@ import java.util.Base64;
 
 @Configuration
 public class FeignDecoderConfig {
-//
-//    @Bean
-//    public Base64.Decoder feignDecoder() {
-//
-//        ObjectFactory<HttpMessageConverters> messageConverters = () -> {
-//            HttpMessageConverters converters = new HttpMessageConverters();
-//            return converters;};
-//        return new SpringDecoder(messageConverters);
-//    }
+
+    @Bean
+    public Base64.Decoder feignDecoder() {
+
+        ObjectFactory<HttpMessageConverters> messageConverters = () -> {
+            HttpMessageConverters converters = new HttpMessageConverters();
+            return converters;};
+        return new SpringDecoder(messageConverters);
+    }
 }
