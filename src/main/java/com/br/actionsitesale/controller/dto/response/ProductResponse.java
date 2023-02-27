@@ -1,4 +1,4 @@
-package com.br.actionsitesale.controller.dto;
+package com.br.actionsitesale.controller.dto.response;
 
 import com.br.actionsitesale.model.Product;
 import com.br.actionsitesale.model.UserAuth;

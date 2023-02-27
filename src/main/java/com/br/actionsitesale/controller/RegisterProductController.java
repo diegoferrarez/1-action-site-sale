@@ -1,21 +1,15 @@
 package com.br.actionsitesale.controller;
 
-import com.br.actionsitesale.controller.dto.ProductRequest;
-import com.br.actionsitesale.controller.dto.ProductResponse;
-import com.br.actionsitesale.model.Product;
-import com.br.actionsitesale.model.Users;
-import com.br.actionsitesale.model.enums.StatusLogin;
+import com.br.actionsitesale.controller.dto.request.ProductRequest;
+import com.br.actionsitesale.controller.dto.response.ProductResponse;
 import com.br.actionsitesale.service.RegisterProductService;
 import com.br.actionsitesale.utils.UserConstants;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

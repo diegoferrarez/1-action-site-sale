@@ -1,4 +1,4 @@
-package com.br.actionsitesale.controller.dto;
+package com.br.actionsitesale.controller.dto.request;
 
 import com.br.actionsitesale.model.UserAuth;
 import com.br.actionsitesale.model.enums.Sizes;

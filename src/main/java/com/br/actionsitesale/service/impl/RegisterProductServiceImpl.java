@@ -1,11 +1,10 @@
 package com.br.actionsitesale.service.impl;
 
-import com.br.actionsitesale.controller.dto.ProductRequest;
-import com.br.actionsitesale.controller.dto.ProductResponse;
+import com.br.actionsitesale.controller.dto.request.ProductRequest;
+import com.br.actionsitesale.controller.dto.response.ProductResponse;
 import com.br.actionsitesale.model.Product;
 import com.br.actionsitesale.repository.ProductStoreRepository;
 import com.br.actionsitesale.service.RegisterProductService;
-import com.br.actionsitesale.service.feign.api.UserApi;
 import com.br.actionsitesale.service.mapper.RegisterProductMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

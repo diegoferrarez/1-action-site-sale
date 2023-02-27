@@ -1,7 +1,7 @@
 package com.br.actionsitesale.service;
 
-import com.br.actionsitesale.controller.dto.ProductRequest;
-import com.br.actionsitesale.controller.dto.ProductResponse;
+import com.br.actionsitesale.controller.dto.request.ProductRequest;
+import com.br.actionsitesale.controller.dto.response.ProductResponse;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
