@@ -2,14 +2,13 @@ package com.br.actionsitesale.controller;
 
 import com.br.actionsitesale.controller.dto.request.ReservationRequest;
 import com.br.actionsitesale.controller.dto.response.ReservationResponse;
+import com.br.actionsitesale.model.Reservation;
 import com.br.actionsitesale.service.AcessControlService;
 import com.br.actionsitesale.utils.UserConstants;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +31,8 @@ public class ReservationController {
     @PostMapping("insert/reservation")
     @ResponseStatus(HttpStatus.CREATED)
     public ReservationResponse createReservationRoom(@RequestHeader(name = UserConstants.USER_SIGN_HEADER)String userLogin,
-                                                                     @RequestHeader(name = UserConstants.USER_PASS_HEADER)String password,
-                                                                     @RequestBody ReservationRequest request){
+                                                     @RequestHeader(name = UserConstants.USER_PASS_HEADER)String password,
+                                                     @RequestBody ReservationRequest request){
         return acessService.createReservation(userLogin, password, request);
     }
 
@@ -42,5 +41,11 @@ public class ReservationController {
                                                      @RequestHeader(name = UserConstants.USER_PASS_HEADER)String password,
                                                      @PathVariable String numberReservation){
         return acessService.cancelReservation(userLogin, password, numberReservation);
+    }
+
+    @GetMapping("sendReport")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ReservationResponse> downloadReport(){
+        return acessService.download();
     }
 }
